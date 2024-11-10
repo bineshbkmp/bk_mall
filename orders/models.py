@@ -17,10 +17,14 @@ class Order(models.Model):
                    (ORDER_DELIVERED,'ORDER_DELEVERED'),
                    (ORDER_REJECTED,'ORDER_REJECTED')) # only these three stages are needed to change by admin. other two, CART_STAGE and ORDER_CONFIRMED are automatically set
     order_status=models.IntegerField(choices=STATUS_CHOICE,default=CART_STAGE)
+    total_price=models.FloatField(default=0)
     owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,related_name='orders')
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Order-{}-{}".format(self.id,self.owner.user.username)  #return "Order-{}-{}".format(self.id,self.owner.name) is actually required. But we have no name field
 
 class OrderedItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True,related_name='added_carts')

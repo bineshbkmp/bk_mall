@@ -29,6 +29,7 @@ def account(request):
             )
             #create customer obj
             customer=Customer.objects.create(
+                name=username,
                 user=user,
                 phone=phone,
                 address=address,

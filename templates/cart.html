@@ -2,5 +2,18 @@
 
 
 {% block content %}
-  {% include 'cart_layout.html' %}
+
+
+  {% if messages %}
+      <div ><br>
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+          {{message}}
+          </div>
+          {% endfor %}
+      </div>
+  {% else %}
+    {% include 'cart_layout.html' %}
+  {% endif %}
+  
 {% endblock content %}

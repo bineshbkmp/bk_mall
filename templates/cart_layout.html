@@ -1,7 +1,10 @@
 {% load static %}
+{% load multiply %} <!-- loading custom-tag file(multiply.py)  created for mulpitlication, defined in multiply.py under templatetags folder in orders-app -->
+{% load total %}  <!--  custom-tag file name is total.py -->
+
 
 <div class="small-container cart-page">
-    {% if cart %}
+    {% if cart and cart.added_items.all %}
     <table>
         <tbody><tr>
             <th>Product</th>
@@ -17,32 +20,34 @@
                         <p>{{ cart_item.product.title }}</p>
                         <small>Price: ${{ cart_item.product.price }}</small>
                         <br>
-                        <a href="">Remove</a>
+                        <a href="{% url 'remove_item' cart_item.id %}">Remove</a>
                     </div>
                 </div>
             </td>
             <td><input type="number" value="{{ cart_item.quantity }}" name="quantity" disabled ></td>
-            <td>${{ cart_item.product.price }} </td>
+            <td>
+                <!-- loading custom tag -->
+                ${% multiply cart_item.product.price  cart_item.quantity %} 
+            </td>
         </tr>
         {% endfor %}
     </tbody></table>
     <div class="total-price">
         <table>
             <tbody><tr>
-                <td>Subtotal</td>
-                <td>$200.00</td>
-            </tr>
-            <tr>
-                <td>Tax</td>
-                <td>$35.00</td>
-            </tr>
-            <tr>
                 <td>Total</td>
-                <td>$230.00</td>
-            </tr>
+                <!-- loading custom tag -->
+                <td>${% get_total cart %} </td>
+            </tr>         
+            
             <tr>
                 <td colspan="2">
-                    <button>Confirm</button>
+                    <form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="total" value="{% get_total cart %}">
+                        <button type="submit" class="btn">CheckOut</button>
+                    </form>
+                    
                 </td>
             </tr>
         </tbody></table>

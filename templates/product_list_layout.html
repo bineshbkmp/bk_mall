@@ -1,6 +1,6 @@
 {% load static %}
- <!-- loading custom tag -->
- {% load chunks %}   
+
+ {% load chunks %}    <!-- loading custom tag -->
 <div class="small-container">
     <div class="row row-2">
         <h2>All Products</h2>
@@ -12,7 +12,7 @@
             <option>Sort By Sale</option>
         </select>
     </div>
-     <!-- using custom tag -->
+      <!-- loading custom tag -->
     <div class="row">
         {% for product_chunks in products|chunks:4 %}
     
