@@ -1,0 +1,19 @@
+{% extends 'blank_layout.html' %}
+
+
+{% block content %}
+
+
+  {% if messages %}
+      <div ><br>
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+          {{message}}
+          </div>
+          {% endfor %}
+      </div>
+  {% else %}
+    {% include 'orders_layout.html' %}
+  {% endif %}
+  
+{% endblock content %}

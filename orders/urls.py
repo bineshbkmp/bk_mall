@@ -26,6 +26,7 @@ urlpatterns = [
     path('',include('customers.urls')),
     path('remove_item/<pk>',views.remove_item,name='remove_item'),
     path('checkout',views.checkout,name='checkout'),
+    path('orders',views.view_orders,name='orders'),
 
 
 ]

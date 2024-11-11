@@ -15,7 +15,8 @@ class Order(models.Model):
     ORDER_REJECTED=4
     STATUS_CHOICE=((ORDER_PROCESSED,'ORDER_PROCESSED'),
                    (ORDER_DELIVERED,'ORDER_DELEVERED'),
-                   (ORDER_REJECTED,'ORDER_REJECTED')) # only these three stages are needed to change by admin. other two, CART_STAGE and ORDER_CONFIRMED are automatically set
+                   (ORDER_REJECTED,'ORDER_REJECTED'),
+                   (ORDER_CONFIRMED,'ORDER_CONFIRMED')) # only these  stages are needed to change by admin. CART_STAGE and ORDER_CONFIRMED are automatically set
     order_status=models.IntegerField(choices=STATUS_CHOICE,default=CART_STAGE)
     total_price=models.FloatField(default=0)
     owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,related_name='orders')

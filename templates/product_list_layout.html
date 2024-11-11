@@ -3,14 +3,32 @@
  {% load chunks %}    <!-- loading custom tag -->
 <div class="small-container">
     <div class="row row-2">
-        <h2>All Products</h2>
-        <select>
-            <option>Default Sort</option>
-            <option>Sort By Price</option>
-            <option>Sort By Popularity</option>
-            <option>Sort By Rating</option>
-            <option>Sort By Sale</option>
-        </select>
+        <h2>All Products</h2>        
+    </div>
+    <div>        
+        <!-- search and sort  -->
+        <form  action="{% url 'search' %}" method="get">
+            <table>
+                <tr>
+                    <td>
+                        <select>
+                            <option>Default Sort</option>
+                            <option>Sort By Price</option>
+                            <option>Sort By Popularity</option>
+                            <option>Sort By Rating</option>
+                            <option>Sort By Sale</option>
+                        </select>
+                    </td>
+                    <td></td><td></td><td></td>
+                    <td >
+                        <input name="search_box" class="" type="search" placeholder="Search here...">
+                    </td>
+                    <td>
+                        <button class="btn" type="submit">Search</button>
+                    </td>
+                </tr>
+            </table>                        
+        </form>       
     </div>
       <!-- loading custom tag -->
     <div class="row">

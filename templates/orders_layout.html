@@ -1,0 +1,30 @@
+
+{% load get_status %}
+
+<div class="small-container cart-page">
+    <h3 class="btn" >Order history</h3>
+    {% if orders %}
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>
+                    <!-- custom tag -->
+                    {% get_status order.order_status %}</td>
+            </tr>
+            {% endfor %}
+        
+    </tbody></table>
+    {% endif %}
+    
+  
+</div>

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from . models import *
 from django.core.paginator import Paginator
+from django.db.models import Q
+
 # Create your views here.
 def index(request):
     featured_products=Product.objects.order_by('priority')[:4] # [:4] will extract first 4 items
@@ -25,4 +27,16 @@ def product_detail(request,pk):
 
     return render(request,'product_detail.html',context)
 
+def search(request):
+    search_products=None
+    context=None
+    if request.GET:
+        search_key=request.GET.get('search_box')
+        search_products=Product.objects.all().filter(Q(title__contains=search_key)|Q(description__contains=search_key))
+        if search_products:
+            context={'products':search_products}
+        else:
+            search_products=Product.objects.all()
+            context={'products':search_products}
+    return render(request,'product_list.html',context)
 
