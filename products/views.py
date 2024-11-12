@@ -40,3 +40,11 @@ def search(request):
             context={'products':search_products}
     return render(request,'product_list.html',context)
 
+
+
+
+
+
+
+
+
